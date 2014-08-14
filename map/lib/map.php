@@ -1,16 +1,12 @@
 <?php
 require 'connection.php';
 
-//if ($mysqli->connect_errno) {
-//    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-//}
-
 $query = "SELECT * 
 	FROM places 
 	LEFT JOIN categories 
-	ON places.id_category = categories.id
+	ON places.id_category = categories.id_categories
 	LEFT JOIN options 
-	ON places.id_option = options.id
+	ON places.id_option = options.id_options
 	";
 
 if ($result = $mysqli->query($query)) {
@@ -21,10 +17,10 @@ if ($result = $mysqli->query($query)) {
 					latitude=\"$row->latitude\" 
 					longitude=\"$row->longitude\" 
 					title=\"$row->name\" 
+					name=\"$row->id_places\" 
 					draggable=\"false\" 
 					icon=\"../images/vegetarian_mapicon.png\"
-					data-place-hidden=\"1\"
-					category=\"$row->category\"
+					category=\"$row->id_category\"
 					option=\"$row->option\"
 				>
 				$row->name

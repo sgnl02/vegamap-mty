@@ -5,13 +5,17 @@ require 'connection.php';
 //    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 //}
 
-$query = "SELECT `option` FROM options";
+$query = "SELECT * FROM options";
 
 if ($result = $mysqli->query($query)) {
 
 		while($row = $result->fetch_object()) {
 			echo "
-	      <li><a href=\"#\" data-show-option=\"$row->option\"> $row->option </a></li>
+				<li>
+					<a href=\"index.php?select=option&amp;selection=$row->id_options\">
+						$row->option
+					</a>
+				</li>
 		";
 		}
 

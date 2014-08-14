@@ -41,6 +41,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			.glyphicon-info-sign {
 				font-size: 20px;
 			}
+			.form-select {
+				padding-top: 8px;
+			}
+			.dropdown-select {
+				width: 220px;
+				border: 1px solid #cccccc;
+				background-color: #ffffff;
+				height: 30px;
+				line-height: 30px;
+			}
     </style>
   </head>
 
@@ -57,7 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="#">VegaMap MTY<sup>0.1</sup></a>
+	      <a class="navbar-brand" href="index.php">VegaMap MTY<sup>0.1</sup></a>
 	    </div>
 	
 	    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipo de comida <span class="caret"></span></a>
 
-	          <ul class="dropdown-menu" role="menu">
+	          <ul class="dropdown-menu" role="menu" id="menu-categories">
 							<?php require 'lib/categories.php'; ?>
 	          </ul>
 	        </li>
@@ -79,21 +89,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 							<?php require 'lib/options.php'; ?>
 	          </ul>
 	        </li>
+
+		      <li>
+						<form class="form-select" action="index.php" method="post">
+						<select class="dropdown-select" name="place">
+						<?php require 'lib/places.php'; ?>
+						</select>
+	
+						<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+					</li>
 	      </ul>
 
-	      <form class="navbar-form navbar-left" role="search">
-	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Lugar" list="places">
-						<datalist id="places">
-							<?php require 'lib/places.php'; ?>
-						</datalist>
-	        </div>
-	        <button type="submit" class="btn btn-default">Buscar</button>
-	      </form>
-				<ul>
-
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" data-toggle="modal" data-target="#info">Info</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#info">Sobre</a></li>
 				</ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
@@ -101,23 +110,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </div>
 
     <google-map latitude="25.6488126" longitude="-100.3030789" disableDefaultUI="false" fitToMarkers="true">	
-		<?php require 'lib/map.php'; ?>
+		<?php 
+			if($_GET['select'] === 'category' && $_GET['selection']) {
+				$category_id = $_GET['selection'];
+				require 'lib/map-select.php';
+			} elseif($_GET['select'] === 'option' && $_GET['selection']) {
+				$option_id = $_GET['selection'];
+				require 'lib/map-select.php';
+			} elseif(ctype_digit($_POST['place'])){
+				$place_id = $_POST['place'];
+				require 'lib/map-select.php';	
+			} else {
+				require 'lib/map.php';	
+			}
+		?>	
     </google-map>
-		<!--
-    <google-map-directions startAddress="San Francisco" endAddress="Mountain View"></google-map-directions>
-
-    <script>
-      var gmap = document.querySelector('google-map');
-      gmap.addEventListener('api-load', function(e) {
-        document.querySelector('google-map-directions').map = this.map;
-      });
-    </script>
-		-->
 
 		<?php require 'lib/add.php'; ?>
 		<?php require 'lib/info.php'; ?>
 
 		<script src="//code.jquery.com/jquery-1.9.0.min.js"></script>	
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
   </body>
 </html>

@@ -1,17 +1,17 @@
 <?php
 require 'connection.php';
 
-//if ($mysqli->connect_errno) {
-//    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-//}
-
-$query = "SELECT `category` FROM categories";
+$query = "SELECT * FROM categories";
 
 if ($result = $mysqli->query($query)) {
 
 		while($row = $result->fetch_object()) {
 			echo "
-	      <li><a href=\"#\" data-show-category=\"$row->category\"> $row->category </a></li>
+				<li>
+					<a href=\"index.php?select=category&amp;selection=$row->id_categories\">
+						$row->category
+					</a>
+				</li>
 		";
 		}
 
