@@ -1,7 +1,13 @@
 <?php
 require 'connection.php';
 
-$query = "SELECT * FROM categories";
+/* Only select categories that are added to the map */
+
+$query = "SELECT DISTINCT `id_categories`, `category` 
+	FROM `places` 
+	LEFT JOIN categories 
+	ON places.id_category = categories.id_categories 
+	ORDER BY `category`";
 
 if ($result = $mysqli->query($query)) {
 

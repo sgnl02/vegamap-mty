@@ -1,10 +1,6 @@
 <?php
 require 'connection.php';
 
-//if ($mysqli->connect_errno) {
-//    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-//}
-
 $query = "SELECT * FROM options";
 
 if ($result = $mysqli->query($query)) {
@@ -22,6 +18,5 @@ if ($result = $mysqli->query($query)) {
     $result->close();
 }
 
-/* close connection */
 $mysqli->close();
 ?>

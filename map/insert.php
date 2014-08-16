@@ -22,19 +22,12 @@ require 'lib/connection.php';
 $latitudeReg = preg_match("/(@)[0-9]{0,}(\.)[0-9]{0,}/i", $_POST['google-map-location'], $latitudeMatch);
 $latitudeReg = preg_match("/(-)[0-9]{0,}(\.)[0-9]{0,}/i", $_POST['google-map-location'], $longitudeMatch);
 
-$name = $mysqli->real_escape_string($_POST['name']);
-$latitude = $mysqli->real_escape_string(substr($latitudeMatch[0], 1));		// Cut off the @-sign
-$longitude = $mysqli->real_escape_string($longitudeMatch[0]);
-$id_category = $mysqli->real_escape_string($_POST['category']);
-$id_option = $mysqli->real_escape_string($_POST['option']);
-$address = $mysqli->real_escape_string($_POST['address']);
-
-//var_dump($name);
-//var_dump($latitude);
-//var_dump($longitude);
-//var_dump($id_category);
-//var_dump($id_option);
-//var_dump($address);
+$name = mysql_real_escape_string($_POST['name']);
+$latitude = mysql_real_escape_string(substr($latitudeMatch[0], 1));		// Cut off the @-sign
+$longitude = mysql_real_escape_string($longitudeMatch[0]);
+$id_category = mysql_real_escape_string($_POST['category']);
+$id_option = mysql_real_escape_string($_POST['option']);
+$address = mysql_real_escape_string($_POST['address']);
 
 mysqli_query(
 $mysqli

@@ -19,9 +19,7 @@ if ($result = $mysqli->query($query)) {
 					title=\"$row->name\" 
 					name=\"$row->id_places\" 
 					draggable=\"false\" 
-					icon=\"../images/vegetarian_mapicon.png\"
-					category=\"$row->id_category\"
-					option=\"$row->option\"
+					icon=\"../images/$row->icon_categories-$row->icon_options.png\"
 				>
 				$row->name
 				</google-map-marker>

@@ -11,7 +11,7 @@ if ($result = $mysqli->query($query)) {
 
 		while($row = $result->fetch_object()) {
 			echo "
-	      <option value=\"$row->id\"> $row->category </option>
+	      <option value=\"$row->id_categories\"> $row->category </option>
 		";
 		}
 

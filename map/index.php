@@ -45,7 +45,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				padding-top: 8px;
 			}
 			.dropdown-select {
-				width: 220px;
 				border: 1px solid #cccccc;
 				background-color: #ffffff;
 				height: 30px;
@@ -59,7 +58,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <div class="above">
 	<nav class="navbar navbar-default" role="navigation">
 	  <div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 	        <span class="sr-only">Toggle navigation</span>
@@ -67,10 +65,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="index.php">VegaMap MTY<sup>0.1</sup></a>
+
+				<a class="navbar-brand" href="index.php"><span class="glyphicon glyphicon-leaf"></span> VegaMap Monterrey<sup>0.3</sup></a>
 	    </div>
 	
-	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 	      <ul class="nav navbar-nav">
@@ -96,7 +94,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						<?php require 'lib/places.php'; ?>
 						</select>
 	
-						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="submit" class="btn btn-default">Mostrar</button>
 						</form>
 					</li>
 	      </ul>
@@ -113,13 +111,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		<?php 
 			if($_GET['select'] === 'category' && $_GET['selection']) {
 				$category_id = $_GET['selection'];
-				require 'lib/map-select.php';
+
+				require (ctype_digit($category_id)) ? 'lib/map-select.php' : 'lib/map.php';
 			} elseif($_GET['select'] === 'option' && $_GET['selection']) {
 				$option_id = $_GET['selection'];
-				require 'lib/map-select.php';
+
+				require (ctype_digit($option_id)) ? 'lib/map-select.php' : 'lib/map.php';
 			} elseif(ctype_digit($_POST['place'])){
 				$place_id = $_POST['place'];
-				require 'lib/map-select.php';	
+
+				require (ctype_digit($place_id)) ? 'lib/map-select.php' : 'lib/map.php';
 			} else {
 				require 'lib/map.php';	
 			}
