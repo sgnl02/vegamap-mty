@@ -29,7 +29,7 @@ if ($result = $mysqli->query($query)) {
 					, &quot;option&quot;:&quot;$row->option&quot;
 			";
 
-			$json .= ($i >= 0 && $i+1 != $result->num_rows) ? "\t" . "}," : "\t" . "}";
+			$json .= ($i >= 0 && $i+1 != $result->num_rows) ? "}," : "}";
 
 			$i++;
 		}
