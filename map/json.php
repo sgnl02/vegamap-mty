@@ -9,36 +9,41 @@ $query = "SELECT *
 	ON places.id_option = options.id_options
 	";
 
+/* Not using the latest PHP, yet. */
+
 if ($result = $mysqli->query($query)) {
 		$i=0;
 
-		echo "[";
+		$json = "[";
 
 		while($row = $result->fetch_object()) {
-			echo "
-<pre>
-	{
-		\"latitude\":\"$row->latitude\"
-		, \"longitude\":\"$row->longitude\" 
-		, \"name\":\"$row->name\" 
-		, \"icon\":\"$row->icon_categories-$row->icon_options.png\"
-		, \"category\":\"$row->category\"
-		, \"option\":\"$row->option\"
-</pre>";
+			$name = str_replace("\'", "'", $row->name);
 
-			if($i >= 0) {
-				echo "},";
-			} else {
-				echo "}";
+			$json .= "
+				{
+					&quot;latitude&quot;:&quot;$row->latitude&quot;  
+					, &quot;longitude&quot;:&quot;$row->longitude&quot; 
+					, &quot;name&quot;:&quot;$name&quot; 
+					, &quot;icon&quot;:&quot;$row->icon_categories-$row->icon_options.png&quot;
+					, &quot;category&quot;:&quot;$row->category&quot;
+					, &quot;option&quot;:&quot;$row->option&quot;
+			";
+
+			if($i >= 0 && $i+1 != $result->num_rows) {
+				$json .= "\t" . "},";
+			}  else {
+				$json .= "\t" . "}";
 			}
 
 			$i++;
 		}
-
-		echo "]";
+		
+		$json .= "]";
 
     $result->close();
 }
+
+echo $json;
 
 $mysqli->close();
 ?>
