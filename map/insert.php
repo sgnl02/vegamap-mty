@@ -1,4 +1,5 @@
 <?php 
+header('Content-Type: text/html; charset=utf-8');
 header('Location: index.php');
 
 if(
@@ -22,12 +23,18 @@ require 'lib/connection.php';
 $latitudeReg = preg_match("/(@)[0-9]{0,}(\.)[0-9]{0,}/i", $_POST['google-map-location'], $latitudeMatch);
 $latitudeReg = preg_match("/(-)[0-9]{0,}(\.)[0-9]{0,}/i", $_POST['google-map-location'], $longitudeMatch);
 
-$name = mysql_real_escape_string($_POST['name']);
+/* The function htmlentities converts UTF-8-characters to HTML-entities, eg.:
+ * htmlentities("ñ", ENT_QUOTES, "UTF-8"); // &ntilde;
+ *
+ * Source: http://muchocodigo.com/php-convertir-tildes-codigos-html/
+ */
+
+$name = mysql_real_escape_string(htmlentities($_POST['name'], ENT_QUOTES, "UTF-8"));
 $latitude = mysql_real_escape_string(substr($latitudeMatch[0], 1));		// Cut off the @-sign
 $longitude = mysql_real_escape_string($longitudeMatch[0]);
-$id_category = mysql_real_escape_string($_POST['category']);
-$id_option = mysql_real_escape_string($_POST['option']);
-$address = mysql_real_escape_string($_POST['address']);
+$id_category = mysql_real_escape_string(htmlentities($_POST['category'], ENT_QUOTES, "UTF-8"));
+$id_option = mysql_real_escape_string(htmlentities($_POST['option'], ENT_QUOTES, "UTF-8"));
+$address = mysql_real_escape_string(htmlentities($_POST['address'], ENT_QUOTES, "UTF-8"));
 
 mysqli_query(
 $mysqli
@@ -38,4 +45,6 @@ $mysqli
 ") 
 	or die(mysqli_error($mysqli));
 }
+
+$mysqli->close();
 ?>
