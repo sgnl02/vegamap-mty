@@ -42,8 +42,7 @@ $mysqli
 	(`name`, `latitude`, `longitude`, `id_category`, `id_option`, `address`)
 	VALUES 
 	('$name', '$latitude', '$longitude', '$id_category', '$id_option', '$address')
-") 
-	or die(mysqli_error($mysqli));
+"); 
 }
 
 $mysqli->close();
