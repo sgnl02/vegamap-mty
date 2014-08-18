@@ -24,7 +24,6 @@ if ($result = $mysqli->query($query)) {
 					&quot;latitude&quot;:&quot;$row->latitude&quot;  
 					, &quot;longitude&quot;:&quot;$row->longitude&quot; 
 					, &quot;name&quot;:&quot;$name&quot; 
-					, &quot;icon&quot;:&quot;$row->icon_categories-$row->icon_options.png&quot;
 					, &quot;category&quot;:&quot;$row->category&quot;
 					, &quot;option&quot;:&quot;$row->option&quot;
 			";

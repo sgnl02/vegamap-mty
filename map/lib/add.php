@@ -7,24 +7,27 @@
       </div>
 
 <!--Form-->
-<form class="form-horizontal" role="form" action="insert.php" method="post">
+<form class="form-horizontal" role="form" action="insert.php" method="post" data-toggle="validator">
 			<div class="modal-body">
 			  <div class="form-group">
 			    <label for="name" class="col-sm-2 control-label">Nombre</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="name" name="name" placeholder="Nombre de lugar">
+			      <input type="text" class="form-control" id="name" name="name" placeholder="Nombre de lugar" data-minlength="5" data-error="Ejemplo: &quot;Mellow Monkey&quot;" required>
+				    <div class="help-block with-errors"></div>
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="address" class="col-sm-2 control-label">Direccion</label>
 			    <div class="col-sm-10">
-			      <textarea class="form-control" id="address" name="address" placeholder="Calle y numero" rows="3"></textarea>
+						<textarea class="form-control" id="address" name="address" placeholder="Calle y numero" rows="3" data-minlength="10" data-error="Ejemplo: &quot;Paseo de los Leones 1929&quot;" required></textarea>
+				    <div class="help-block with-errors"></div>
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="google-map-location" class="col-sm-2 control-label">Ubicacion</label>
 			    <div class="col-sm-10">
-			      <textarea class="form-control" id="google-map-location" name="google-map-location" placeholder="Ubicacion en Google Map" rows="3"></textarea><br/>
+			      <textarea class="form-control" id="google-map-location" name="google-map-location" placeholder="Ubicacion en Google Map" rows="3" data-error="https://www.google.com.mx/maps/place/@25.693133,-100.377911,18z" pattern="((@|-))[0-9]{0,}(\.)[0-9]{0,}" data-minlength="10" required></textarea><br/>
+				    <div class="help-block with-errors"></div>
 
 						<div class="alert alert-warning fade in" role="alert">
   				    <span class="glyphicon glyphicon-map-marker"></span>
@@ -45,7 +48,7 @@
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="category" class="col-sm-2 control-label">Tipo de comida</label>
+			    <label for="category" class="col-sm-2 control-label">Tipo de lugar</label>
 			    <div class="col-sm-10">
 						<select class="form-control" id="category" name="category">
 							<?php include 'lib/add-categories.php'; ?>

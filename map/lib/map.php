@@ -21,7 +21,8 @@ if ($result = $mysqli->query($query)) {
 					draggable=\"false\" 
 					icon=\"../images/$row->icon_categories-$row->icon_options.png\"
 				>
-				$row->name
+				<strong>$row->name</strong>
+				<p>$row->address</p>
 				</google-map-marker>
 		";
 		}
@@ -29,15 +30,5 @@ if ($result = $mysqli->query($query)) {
     $result->close();
 }
 
-if ($_GET['jaime'] === 'casa') {
-	echo '
-		<google-map-marker latitude="38.2987575" longitude="141.4178581"
-												 title="The house of Jaime" draggable="true"
-												icon="../images/cat_mapicon.png"
-		>
-	';
-}
-
-/* close connection */
 $mysqli->close();
 ?>

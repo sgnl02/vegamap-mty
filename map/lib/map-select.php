@@ -61,15 +61,6 @@ if ($result = $mysqli->query($query)) {
     $result->close();
 }
 
-if ($_GET['jaime'] === 'casa') {
-	echo '
-		<google-map-marker latitude="38.2987575" longitude="141.4178581"
-												 title="The house of Jaime" draggable="true"
-												icon="../images/cat_mapicon.png"
-		>
-	';
-}
-
 /* close connection */
 $mysqli->close();
 ?>

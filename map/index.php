@@ -111,15 +111,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		<?php 
 			if($_GET['select'] === 'category' && $_GET['selection']) {
 				$category_id = $_GET['selection'];
-
 				require (ctype_digit($category_id)) ? 'lib/map-select.php' : 'lib/map.php';
-			} elseif($_GET['select'] === 'option' && $_GET['selection']) {
+			} 
+			elseif($_GET['select'] === 'option' && $_GET['selection']) {
 				$option_id = $_GET['selection'];
-
 				require (ctype_digit($option_id)) ? 'lib/map-select.php' : 'lib/map.php';
 			} elseif(ctype_digit($_POST['place'])){
 				$place_id = $_POST['place'];
-
 				require (ctype_digit($place_id)) ? 'lib/map-select.php' : 'lib/map.php';
 			} else {
 				require 'lib/map.php';	
@@ -132,6 +130,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 		<script src="//code.jquery.com/jquery-1.9.0.min.js"></script>	
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-validator.js"></script>	
 
   </body>
 </html>
